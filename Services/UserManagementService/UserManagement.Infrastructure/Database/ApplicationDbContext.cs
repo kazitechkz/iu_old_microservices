@@ -19,6 +19,7 @@ namespace UserManagement.Infrastructure.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            modelBuilder.Entity<ISoftDelete>().HasQueryFilter(x => x.IsDeleted == false);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
