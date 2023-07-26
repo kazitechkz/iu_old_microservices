@@ -9,7 +9,7 @@ using UserManagement.Application.DTO.UserDTO;
 
 namespace UserManagement.Application.DTO.UserRoleDTO
 {
-    public class UserRoleUDTO : BaseRDTO
+    public class UserRoleUDTO
     {
         public long UserId { get; set; }
 

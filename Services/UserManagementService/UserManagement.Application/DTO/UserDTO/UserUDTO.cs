@@ -7,7 +7,7 @@ using UserManagement.Application.DTO.BaseDTO;
 
 namespace UserManagement.Application.DTO.UserDTO
 {
-    public class UserUDTO : BaseRDTO
+    public class UserUDTO
     {
         public string Name { get; set; }
         public string Surname { get; set; }

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using UserManagement.Domain.ModelConfigurations;
 using UserManagement.Domain.Models;
-using UserManagement.Infrastructure.Interceptors;
 
 namespace UserManagement.Infrastructure.Database
 {
@@ -19,12 +19,46 @@ namespace UserManagement.Infrastructure.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            modelBuilder.Entity<ISoftDelete>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<GenderModel>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<RoleModel>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<UserModel>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<UserRoleModel>().HasQueryFilter(x => x.IsDeleted == false);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.AddInterceptors(new ChangeBaseInterceptor());
+            
+        }
+        public override int SaveChanges()
+        {
+            UpdateSoftDeleteStatuses();
+            return base.SaveChanges();
+        }
+        public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            UpdateSoftDeleteStatuses();
+            return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
+        }
+
+        private void UpdateSoftDeleteStatuses()
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.CurrentValues["CreatedAt"] = DateTime.UtcNow;
+                        break;
+                    case EntityState.Modified:
+                        entry.CurrentValues["UpdatedAt"] = DateTime.UtcNow;
+                        break;
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        entry.CurrentValues["IsDeleted"] = true;
+                        entry.CurrentValues["DeletedAt"] = DateTime.UtcNow;
+                        break;
+                }
+            }
         }
 
 

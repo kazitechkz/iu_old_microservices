@@ -7,12 +7,11 @@ using UserManagement.Application.DTO.BaseDTO;
 
 namespace UserManagement.Application.DTO.RoleDTO
 {
-    public class RoleUDTO : BaseRDTO
+    public class RoleUDTO
     {
         public string TitleRu { get; set; }
         public string TitleKk { get; set; }
         public string TitleEn { get; set; }
-        public string Code { get; set; }
         
         public int Status { get; set; }
     }

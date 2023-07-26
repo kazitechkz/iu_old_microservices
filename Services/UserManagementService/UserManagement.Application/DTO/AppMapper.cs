@@ -18,10 +18,10 @@ namespace UserManagement.Application.DTO
         public AppMapper()
         {
             //Base
-            CreateMap<BaseRDTO,BaseModel>().ReverseMap();
+            CreateMap<BaseRDTO, BaseModel>().ReverseMap();
             //Role
-            CreateMap<RoleRDTO,RoleModel>().ReverseMap();
-            CreateMap<RoleCDTO,RoleModel>().ReverseMap();
+            CreateMap<RoleRDTO, RoleModel>().ReverseMap();
+            CreateMap<RoleCDTO, RoleModel>().ReverseMap();
             CreateMap<RoleUDTO, RoleModel>().ReverseMap();
             //Gender
             CreateMap<GenderRDTO, GenderModel>().ReverseMap();

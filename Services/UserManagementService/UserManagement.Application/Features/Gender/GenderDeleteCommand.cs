@@ -31,11 +31,10 @@ namespace UserManagement.Application.Features.Gender
         private readonly IMapper mapper;
         private readonly AppConfig appConfig;
 
-        public GenderDeleteCommandHandler(IGenderRepository genderRepository, IMapper mapper, AppConfig appConfig)
+        public GenderDeleteCommandHandler(IGenderRepository genderRepository, IMapper mapper)
         {
             this.genderRepository = genderRepository;
             this.mapper = mapper;
-            this.appConfig = appConfig;
         }
 
         public async Task<ResponseRDTO<bool>> Handle(GenderDeleteCommand request, CancellationToken cancellationToken)
@@ -68,7 +67,7 @@ namespace UserManagement.Application.Features.Gender
                     StatusCode = 500,
                     Success = false,
                     Message = "Something went wrong",
-                    Detail = (appConfig.IsDevelopement == true ? ex.ToString() : "")
+                    Detail = ex.ToString()
                 };
             }
         }

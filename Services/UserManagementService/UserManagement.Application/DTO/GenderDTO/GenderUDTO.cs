@@ -7,7 +7,7 @@ using UserManagement.Domain.Models;
 
 namespace UserManagement.Application.DTO.GenderDTO
 {
-    public class GenderUDTO : BaseModel
+    public class GenderUDTO
     {
         public string TitleRu { get; set; }
         public string TitleKk { get; set; }

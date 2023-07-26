@@ -51,7 +51,6 @@ namespace UserManagement.Infrastructure.Contracts.Repositories
         {
             await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
-            _context.Entry(entity).State = EntityState.Detached;
             return entity;
         }
 
@@ -59,7 +58,6 @@ namespace UserManagement.Infrastructure.Contracts.Repositories
         {
             _context.Set<T>().Update(entity);
             await _context.SaveChangesAsync();
-            _context.Entry(entity).State = EntityState.Detached;
             return entity;
         }
 

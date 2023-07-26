@@ -7,12 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using UserManagement.Application.Helpers;
 using UserManagement.Domain.Models;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace UserManagement.Infrastructure.Database
 {
     public class DbSeeder
     {
-
+        //dotnet ef migrations add InitialMigration -p../UserManagement.Infrastructure -o Database/Migrations
         public async static Task SeedAsync(ApplicationDbContext context, ILoggerFactory loggerFactory)
         {
             ILogger<DbSeeder> logger = loggerFactory.CreateLogger<DbSeeder>();
@@ -20,17 +21,20 @@ namespace UserManagement.Infrastructure.Database
             {
                 if (!context.Roles.Any()) {
                     await context.Roles.AddRangeAsync(DbSeeder.GetRoles());
+                    await context.SaveChangesAsync();
                     logger.LogInformation("Successfully Migrated Roles");
                 }
 
                 if (!context.Genders.Any())
                 {
                     await context.Genders.AddRangeAsync(DbSeeder.GetGenders());
+                    await context.SaveChangesAsync();
                     logger.LogInformation("Successfully Migrated Genders");
                 }
                 if (!context.Users.Any())
                 {
                    await context.Users.AddRangeAsync(DbSeeder.GetUsers());
+                    await context.SaveChangesAsync();
                     logger.LogInformation("Successfully Migrated Roles");
                     if (!context.UserRoles.Any())
                     {
@@ -52,6 +56,7 @@ namespace UserManagement.Infrastructure.Database
                                     Status = 1
                                 }
                                 );
+                            await context.SaveChangesAsync();
                             logger.LogInformation("Successfully Migrated User Role - Admin Role");
                         }
                        if(moder != null && moder_role != null)
@@ -67,8 +72,8 @@ namespace UserManagement.Infrastructure.Database
  
                                 }
                             );
+                            await context.SaveChangesAsync();
                             logger.LogInformation("Successfully Migrated User Role - Global Moder");
-
                         }
                     }
                 }
@@ -122,7 +127,7 @@ namespace UserManagement.Infrastructure.Database
                     TitleRu = "Учитель",
                     TitleEn = "Teacher",
                     TitleKk = "Мұғалім",
-                    Code = DbConstants.ModerCode,
+                    Code = DbConstants.TeacherCode,
                     Status = 1
                 },
               new RoleModel()
@@ -130,7 +135,7 @@ namespace UserManagement.Infrastructure.Database
                     TitleRu = "Обучающийся",
                     TitleEn = "Student",
                     TitleKk = "Оқушы",
-                    Code = DbConstants.ModerCode,
+                    Code = DbConstants.StudentCode,
                     Status = 1
                 },
             };        

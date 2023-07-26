@@ -31,13 +31,11 @@ namespace UserManagement.Application.Features.Gender
     {
         private readonly IGenderRepository genderRepository;
         private readonly IMapper mapper;
-        private readonly AppConfig appConfig;
 
-        public GenderUpdateCommandHandler(IGenderRepository genderRepository, IMapper mapper, AppConfig appConfig)
+        public GenderUpdateCommandHandler(IGenderRepository genderRepository, IMapper mapper)
         {
             this.genderRepository = genderRepository;
             this.mapper = mapper;
-            this.appConfig = appConfig;
         }
         public async Task<ResponseRDTO<GenderRDTO>> Handle(GenderUpdateCommand request, CancellationToken cancellationToken)
         {
@@ -53,7 +51,7 @@ namespace UserManagement.Application.Features.Gender
                         Message = "Not Found"
                     };
                 }
-                entity = mapper.Map<GenderModel>(request.model);
+                entity = mapper.Map<GenderUDTO,GenderModel>(request.model,entity);
                 entity = await genderRepository.UpdateAsync(entity);
                 return new ResponseRDTO<GenderRDTO>
                 {
@@ -70,7 +68,7 @@ namespace UserManagement.Application.Features.Gender
                     StatusCode = 500,
                     Success = false,
                     Message = "Something went wrong",
-                    Detail = (appConfig.IsDevelopement == true ? ex.ToString() : "")
+                    Detail = ex.ToString()
                 };
             }
         }
@@ -85,7 +83,7 @@ namespace UserManagement.Application.Features.Gender
             RuleFor(p => p.model.TitleRu).NotEmpty().WithMessage(x => "Not Empty").MaximumLength(255).WithMessage("Max Length 255").OverridePropertyName("TitleRu");
             RuleFor(p => p.model.TitleKk).NotEmpty().WithMessage(x => "Not Empty").MaximumLength(255).WithMessage("Max Length 255").OverridePropertyName("TitleKk");
             RuleFor(p => p.model.Status).NotEmpty().WithMessage(x => "Not Empty").OverridePropertyName("Status");
-            RuleFor(p => p.model.Code).NotEmpty().WithMessage(x => "Not Empty").MaximumLength(255).WithMessage("Max Length 255").OverridePropertyName("Code");
+            RuleFor(p => p.model.Code).NotNull().WithMessage(x => "Not Empty").OverridePropertyName("Code");
         }
     }
 

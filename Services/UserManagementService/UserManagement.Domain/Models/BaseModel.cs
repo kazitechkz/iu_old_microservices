@@ -15,12 +15,12 @@ namespace UserManagement.Domain.Models
 
         public DateTime CreatedAt { get; set; }
 
-        [DefaultValue(null)]
+        
         public DateTime? UpdatedAt { get; set;}
-        [DefaultValue(null)]
+        
         public DateTime? DeletedAt { get; set; }
 
-        [DefaultValue(false)]
+        
         public bool IsDeleted { get; set; }
     }
 }

@@ -8,56 +8,63 @@ using System.Threading.Tasks;
 using UserManagement.Application.Contracts.IRepositories;
 using UserManagement.Application.DTO.GenderDTO;
 using UserManagement.Application.DTO.ResponseDTO;
+using UserManagement.Application.DTO.RoleDTO;
 using UserManagement.Domain.Models;
-using UserManagement.Domain;
 
-namespace UserManagement.Application.Features.Gender
+namespace UserManagement.Application.Features.Role
 {
-    public class GenderGetByIdQuery : IRequest<ResponseRDTO<GenderRDTO>>
+    public class RoleUpdateCommand : IRequest<ResponseRDTO<RoleRDTO>>
     {
+
+        public RoleUDTO model { get; set; }
         public long Id { get; set; }
-        public GenderGetByIdQuery( long Id)
+
+        public RoleUpdateCommand(RoleUDTO model, long Id)
         {
+            this.model = model;
             this.Id = Id;
         }
     }
 
-    public class GenderGetByIdQueryHandler : IRequestHandler<GenderGetByIdQuery, ResponseRDTO<GenderRDTO>>
-    {
-        private readonly IGenderRepository genderRepository;
-        private readonly IMapper mapper;
-        private readonly AppConfig appConfig;
 
-        public GenderGetByIdQueryHandler(IGenderRepository genderRepository, IMapper mapper)
+    public class RoleUpdateCommandHandler : IRequestHandler<RoleUpdateCommand,ResponseRDTO<RoleRDTO>>
+    {
+        private readonly IRoleRepository repository;
+        private readonly IMapper mapper;
+
+        public RoleUpdateCommandHandler(IRoleRepository repository, IMapper mapper)
         {
-            this.genderRepository = genderRepository;
+            this.repository = repository;
             this.mapper = mapper;
         }
-        public async Task<ResponseRDTO<GenderRDTO>> Handle(GenderGetByIdQuery request, CancellationToken cancellationToken)
+
+        public async Task<ResponseRDTO<RoleRDTO>> Handle(RoleUpdateCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                GenderModel entity = await genderRepository.GetByIdAsync(request.Id);
+                RoleModel entity = await repository.GetByIdAsync(request.Id);
                 if (entity == null)
                 {
-                    return new ResponseRDTO<GenderRDTO>
+                    return new ResponseRDTO<RoleRDTO>
                     {
                         StatusCode = 404,
                         Success = true,
                         Message = "Not Found"
                     };
                 }
-                return new ResponseRDTO<GenderRDTO>
+                entity = mapper.Map<RoleUDTO, RoleModel>(request.model, entity);
+                entity = await repository.UpdateAsync(entity);
+                return new ResponseRDTO<RoleRDTO>
                 {
                     StatusCode = 201,
                     Success = true,
-                    Data = mapper.Map<GenderRDTO>(entity)
+                    Data = mapper.Map<RoleRDTO>(entity)
                 };
             }
             catch (Exception ex)
             {
 
-                return new ResponseRDTO<GenderRDTO>
+                return new ResponseRDTO<RoleRDTO>
                 {
                     StatusCode = 500,
                     Success = false,
@@ -67,4 +74,7 @@ namespace UserManagement.Application.Features.Gender
             }
         }
     }
+
+
+
 }

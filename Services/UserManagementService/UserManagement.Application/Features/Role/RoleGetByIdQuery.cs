@@ -8,56 +8,57 @@ using System.Threading.Tasks;
 using UserManagement.Application.Contracts.IRepositories;
 using UserManagement.Application.DTO.GenderDTO;
 using UserManagement.Application.DTO.ResponseDTO;
+using UserManagement.Application.DTO.RoleDTO;
 using UserManagement.Domain.Models;
-using UserManagement.Domain;
 
-namespace UserManagement.Application.Features.Gender
+namespace UserManagement.Application.Features.Role
 {
-    public class GenderGetByIdQuery : IRequest<ResponseRDTO<GenderRDTO>>
+    public class RoleGetByIdQuery : IRequest<ResponseRDTO<RoleRDTO>>
     {
         public long Id { get; set; }
-        public GenderGetByIdQuery( long Id)
+        public RoleGetByIdQuery(long Id)
         {
             this.Id = Id;
         }
     }
 
-    public class GenderGetByIdQueryHandler : IRequestHandler<GenderGetByIdQuery, ResponseRDTO<GenderRDTO>>
+    public class RoleGetByIdQueryHandler : IRequestHandler<RoleGetByIdQuery, ResponseRDTO<RoleRDTO>>
     {
-        private readonly IGenderRepository genderRepository;
-        private readonly IMapper mapper;
-        private readonly AppConfig appConfig;
 
-        public GenderGetByIdQueryHandler(IGenderRepository genderRepository, IMapper mapper)
+        private readonly IRoleRepository repository;
+        private readonly IMapper mapper;
+
+        public RoleGetByIdQueryHandler(IRoleRepository repository, IMapper mapper)
         {
-            this.genderRepository = genderRepository;
+            this.repository = repository;
             this.mapper = mapper;
         }
-        public async Task<ResponseRDTO<GenderRDTO>> Handle(GenderGetByIdQuery request, CancellationToken cancellationToken)
+
+        public async Task<ResponseRDTO<RoleRDTO>> Handle(RoleGetByIdQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                GenderModel entity = await genderRepository.GetByIdAsync(request.Id);
+                RoleModel entity = await repository.GetByIdAsync(request.Id);
                 if (entity == null)
                 {
-                    return new ResponseRDTO<GenderRDTO>
+                    return new ResponseRDTO<RoleRDTO>
                     {
                         StatusCode = 404,
                         Success = true,
                         Message = "Not Found"
                     };
                 }
-                return new ResponseRDTO<GenderRDTO>
+                return new ResponseRDTO<RoleRDTO>
                 {
-                    StatusCode = 201,
+                    StatusCode = 200,
                     Success = true,
-                    Data = mapper.Map<GenderRDTO>(entity)
+                    Data = mapper.Map<RoleRDTO>(entity)
                 };
             }
             catch (Exception ex)
             {
 
-                return new ResponseRDTO<GenderRDTO>
+                return new ResponseRDTO<RoleRDTO>
                 {
                     StatusCode = 500,
                     Success = false,
@@ -67,4 +68,6 @@ namespace UserManagement.Application.Features.Gender
             }
         }
     }
+
+
 }
