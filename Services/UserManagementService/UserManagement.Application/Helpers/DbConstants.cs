@@ -8,17 +8,17 @@ namespace UserManagement.Application.Helpers
 {
     public static class DbConstants
     {
-        public static string GlobalAdminCode = "superadmin";
-        public static string GlobalModerCode = "supermoder";
-        public static string LocalAdminCode = "admin";
-        public static string ModerCode = "moder";
-        public static string TeacherCode = "teacher";
-        public static string StudentCode = "student";
+        public const string GlobalAdminCode = "superadmin";
+        public const string GlobalModerCode = "supermoder";
+        public const string LocalAdminCode = "admin";
+        public const string ModerCode = "moder";
+        public const string TeacherCode = "teacher";
+        public const string StudentCode = "student";
 
 
-        public static string MaleCode = "male";
-        public static string FemaleCode = "female";
-        public static string NoGenderCode = "no_gender";
+        public const string MaleCode = "male";
+        public const string FemaleCode = "female";
+        public const string NoGenderCode = "no_gender";
 
 
     }

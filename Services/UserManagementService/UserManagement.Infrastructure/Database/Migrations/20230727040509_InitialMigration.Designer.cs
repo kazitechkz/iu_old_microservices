@@ -11,7 +11,7 @@ using UserManagement.Infrastructure.Database;
 namespace UserManagement.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230726154016_InitialMigration")]
+    [Migration("20230727040509_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

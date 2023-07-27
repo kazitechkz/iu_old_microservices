@@ -27,7 +27,7 @@ namespace UserManagement.Domain.Models
 
         public long? GenderId { get; set; }
 
-        public ICollection<UserRoleModel> Roles { get; set; }
+        public ICollection<UserRoleModel> UserRoles { get; set; }
 
         public GenderModel? Gender { get; set; }
 

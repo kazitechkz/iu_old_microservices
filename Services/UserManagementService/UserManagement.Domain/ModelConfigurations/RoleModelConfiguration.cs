@@ -18,7 +18,6 @@ namespace UserManagement.Domain.ModelConfigurations
             builder.Property<string>(p => p.TitleKk).HasMaxLength(255).IsRequired();
             builder.HasIndex(p => p.Code).IsUnique();
             builder.Property<int>(p => p.Status).IsRequired();
-
         }
     }
 }

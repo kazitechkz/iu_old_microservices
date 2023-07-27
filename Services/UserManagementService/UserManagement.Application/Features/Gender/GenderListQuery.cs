@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,8 @@ namespace UserManagement.Application.Features.Gender
     {
         private readonly IGenderRepository genderRepository;
         private readonly IMapper mapper;
-        private readonly AppConfig appConfig;
-
+       
+       
         public GenderListQueryHandler(IGenderRepository genderRepository, IMapper mapper)
         {
             this.genderRepository = genderRepository;

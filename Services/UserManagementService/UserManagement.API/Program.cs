@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
+using System.Text.Json.Serialization;
 using UserManagement.API.Middlewares;
 using UserManagement.Application;
 using UserManagement.Domain;
@@ -11,10 +12,11 @@ using UserManagement.Infrastructure.Database;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-AppConfig _configuration = builder.Configuration
-    .GetSection("AppConfig")
-    .Get<AppConfig>();
-builder.Services.AddControllers();
+builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+builder.Services.Configure<AppConfig>(builder.Configuration.GetSection("AppConfiguration"));
+builder.Services.Configure<AppConfig>(builder.Configuration.GetSection("ExternalAPI"));
+
+builder.Services.AddControllers().AddJsonOptions(options =>{ options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;}); ;
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -9,6 +9,6 @@ namespace UserManagement.Application.Contracts.IRepositories
 {
     public interface IRoleRepository : IGenericRepository<RoleModel>
     {
-
+        public Task<RoleModel> GetRoleByCode(string code);
     }
 }

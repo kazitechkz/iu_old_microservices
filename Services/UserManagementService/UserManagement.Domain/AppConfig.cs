@@ -8,8 +8,8 @@ namespace UserManagement.Domain
 {
     public class AppConfig
     {
-        public bool? IsDevelopement { get; set; } = true;
-
+        public string? Mode { get; set; }
+        public string? OrganizationService { get; set; }
 
     }
 }

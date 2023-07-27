@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UserManagement.Application.DTO.BaseDTO;
+using UserManagement.Application.DTO.UserRoleDTO;
 using UserManagement.Domain.Models;
 
 namespace UserManagement.Application.DTO.UserDTO
@@ -27,7 +28,7 @@ namespace UserManagement.Application.DTO.UserDTO
 
         public long? GenderId { get; set; }
 
-      
+        public IReadOnlyCollection<UserRoleRDTO> UserRoles { get; set; }
 
 
 

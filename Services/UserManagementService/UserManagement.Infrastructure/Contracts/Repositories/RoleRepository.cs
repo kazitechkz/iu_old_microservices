@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,15 @@ namespace UserManagement.Infrastructure.Contracts.Repositories
 {
     public class RoleRepository : GenericRepository<RoleModel>, IRoleRepository
     {
+        private readonly ApplicationDbContext _context;
         public RoleRepository(ApplicationDbContext context) : base(context)
         {
+            _context = context;
+        }
+
+        public Task<RoleModel> GetRoleByCode(string code)
+        {
+            return _context.Roles.FirstOrDefaultAsync(p=>p.Code.Equals(code));
         }
     }
 }

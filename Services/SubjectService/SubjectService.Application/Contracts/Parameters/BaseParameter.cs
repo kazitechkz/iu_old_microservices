@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserManagement.Infrastructure.Contracts.Parameters
+namespace SubjectService.Application.Contracts.Parameters
 {
     public class BaseParameter
     {

@@ -19,7 +19,7 @@ namespace UserManagement.Infrastructure.Database
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-            modelBuilder.Entity<GenderModel>().HasQueryFilter(x => x.IsDeleted == false);
+           // modelBuilder.Entity<GenderModel>().HasQueryFilter(x => x.IsDeleted == false);
             modelBuilder.Entity<RoleModel>().HasQueryFilter(x => x.IsDeleted == false);
             modelBuilder.Entity<UserModel>().HasQueryFilter(x => x.IsDeleted == false);
             modelBuilder.Entity<UserRoleModel>().HasQueryFilter(x => x.IsDeleted == false);

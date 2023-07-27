@@ -27,7 +27,13 @@ namespace UserManagement.Application.DTO.UserDTO
 
         public long? GenderId { get; set; }
 
+        public string? Code { get; set; }
 
+        public long? SchoolId { get; set; }
+
+        public long? AcademicYearId { get; set; }
+        public DateOnly? StartAt { get; set; }
+        public DateOnly? EndAt { get; set; }
 
 
     }

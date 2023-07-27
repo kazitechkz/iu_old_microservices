@@ -1,21 +1,22 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Net;
 using UserManagement.Application.DTO.GenderDTO;
 using UserManagement.Application.DTO.ResponseDTO;
 using UserManagement.Application.DTO.RoleDTO;
 using UserManagement.Application.Features.Gender;
 using UserManagement.Application.Features.Role;
+using UserManagement.Domain;
 
 namespace UserManagement.API.Controllers
 {
     public class RoleController : BaseApiController
     {
         private readonly IMediator _mediator;
-
         public RoleController(IMediator mediator)
         {
-            _mediator = mediator;
+            _mediator = mediator;  
         }
 
         [HttpGet]
@@ -41,6 +42,8 @@ namespace UserManagement.API.Controllers
             ResponseRDTO<RoleRDTO> result = await _mediator.Send(new RoleUpdateCommand(model, Id));
             return StatusCode(result.StatusCode, result);
         }
+
+       
 
     }
 }

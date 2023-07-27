@@ -9,5 +9,12 @@ namespace UserManagement.Application.Contracts.IRepositories
 {
     public interface IUserRepository : IGenericRepository<UserModel>
     {
+        public Task<UserModel> GetUserByEmail(string email);
+
+        public Task<UserModel> GetUserByPhone(string phone);
+
+
+
+
     }
 }
