@@ -23,8 +23,8 @@ namespace SubjectService.Application.DTO
             CreateMap<GradeLevelUDTO, GradeLevelModel>().ReverseMap();
 
             CreateMap<LanguageRDTO, LanguageModel>().ReverseMap();
-            CreateMap<LanguageCDTO, GradeLevelModel>().ReverseMap();
-            CreateMap<LanguageUDTO, GradeLevelModel>().ReverseMap();
+            CreateMap<LanguageCDTO, LanguageModel>().ReverseMap();
+            CreateMap<LanguageUDTO, LanguageModel>().ReverseMap();
 
             CreateMap<SubjectRDTO, SubjectModel>().ReverseMap();
             CreateMap<SubjectCDTO, SubjectModel>().ReverseMap();

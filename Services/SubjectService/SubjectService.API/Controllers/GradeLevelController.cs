@@ -1,12 +1,13 @@
-﻿using GradeLevelService.Application.Features.GradeLevel;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using GradeLevelService.Application.Features.GradeLevel;
+using System.Net;
 using SubjectService.Application.DTO.GradeLevelDTO;
 using SubjectService.Application.DTO.ResponseDTO;
 using SubjectService.Application.Features.GradeLevel;
-using System.Net;
+using SubjectService.API.Controllers;
 
-namespace SubjectService.API.Controllers
+namespace GradeLevelService.API.Controllers
 {
     public class GradeLevelController : BaseApiController
     {
@@ -23,6 +24,11 @@ namespace SubjectService.API.Controllers
         {
             ResponseRDTO<GradeLevelRDTO> result = await _mediator.Send(new GradeLevelGetByIdQuery(Id));
             return StatusCode(result.StatusCode, result);
+        }
+
+        private ActionResult<ResponseRDTO<GradeLevelRDTO>> StatusCode(int statusCode, ResponseRDTO<GradeLevelRDTO> result)
+        {
+            throw new NotImplementedException();
         }
 
         [HttpGet]

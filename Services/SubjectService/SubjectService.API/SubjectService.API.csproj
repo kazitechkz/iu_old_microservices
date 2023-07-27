@@ -12,16 +12,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.9">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\SubjectService.Application\SubjectService.Application.csproj" />
-    <ProjectReference Include="..\..\SubjectService.Infrastructure\SubjectService.Infrastructure.csproj" />
+    <ProjectReference Include="..\SubjectService.Application\SubjectService.Application.csproj" />
+    <ProjectReference Include="..\SubjectService.Infrastructure\SubjectService.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

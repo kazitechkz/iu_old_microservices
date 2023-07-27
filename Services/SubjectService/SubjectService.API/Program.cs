@@ -1,5 +1,5 @@
-using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore;
+using SubjectService.API.Middlewares;
 using SubjectService.Application;
 using SubjectService.Infrastructure;
 using SubjectService.Infrastructure.Database;
@@ -7,12 +7,12 @@ using SubjectService.Infrastructure.Database;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Configuration.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
-builder.Services.AddControllers().AddJsonOptions(options => { options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles; }); ;
+
+builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
- builder.Services.AddApplicationService();
+builder.Services.AddApplicationService();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
@@ -37,10 +37,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
+app.UseMiddleware(typeof(ExceptionHandlerMiddleware));
 app.MapControllers();
 
 app.Run();
