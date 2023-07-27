@@ -55,11 +55,16 @@ public class EditCommand
             {
                 return Response<SchoolRDTO>.Failure("LegalForm not found");
             }
-            var code = await _school.GetByCodeAsync(request.schoolCud.Code);
-            if (code != null)
+
+            if (school.Code != request.schoolCud.Code)
             {
-                return Response<SchoolRDTO>.Failure("Такая школа уже есть в базе!");
+                var code = await _school.GetByCodeAsync(request.schoolCud.Code);
+                if (code != null)
+                {
+                    return Response<SchoolRDTO>.Failure("Такой код школы уже есть в базе!");
+                }
             }
+            
             _mapper.Map(request.schoolCud, school);
             await _school.UpdateAsync(school);
             return Response<SchoolRDTO>.Success(_mapper.Map<SchoolRDTO>(school));

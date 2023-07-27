@@ -1,9 +1,9 @@
 ﻿using System.Reflection;
+using AcademicYearService.Domain.ModelConfigurations;
+using AcademicYearService.Domain.Models;
 using Microsoft.EntityFrameworkCore;
-using OrganizationService.Domain.ModelConfigurations;
-using OrganizationService.Domain.Models;
 
-namespace OrganizationService.Infrastructure;
+namespace AcademicYearService.Infrastructure;
 
 public class DataContext : DbContext
 {
@@ -46,7 +46,7 @@ public class DataContext : DbContext
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
     
-    public DbSet<Area> Areas { get; set; }
-    public DbSet<LegalForm> LegalForms { get; set; }
-    public DbSet<School> Schools { get; set; }
+    public DbSet<AcademicYear> AcademicYears { get; set; }
+    public DbSet<Term> Terms { get; set; }
+
 }
