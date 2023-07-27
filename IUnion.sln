@@ -25,6 +25,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizationService.Applica
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizationService.Infrastructure", "Services\OrganizationService\OrganizationService.Infrastructure\OrganizationService.Infrastructure.csproj", "{E392DF4D-C62C-4224-9CA5-89CBB3552059}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AcademicYearService", "AcademicYearService", "{4D397F45-D8F7-4BC6-836C-4CEDB34B9294}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademicYearService.API", "Services\AcademicYearService\AcademicYearService.API\AcademicYearService.API.csproj", "{FB194D03-6599-4635-B0C7-6E4FF977E86C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademicYearService.Application", "Services\AcademicYearService\AcademicYearService.Application\AcademicYearService.Application.csproj", "{43DBC787-EEDF-46B6-BE8C-F1F758275044}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademicYearService.Domain", "Services\AcademicYearService\AcademicYearService.Domain\AcademicYearService.Domain.csproj", "{5A83129B-5F45-4B30-A40C-7D8520A73A7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcademicYearService.Infrastructure", "Services\AcademicYearService\AcademicYearService.Infrastructure\AcademicYearService.Infrastructure.csproj", "{827B45D9-3647-4740-8FBD-A790B64E48CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +73,22 @@ Global
 		{E392DF4D-C62C-4224-9CA5-89CBB3552059}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E392DF4D-C62C-4224-9CA5-89CBB3552059}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E392DF4D-C62C-4224-9CA5-89CBB3552059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB194D03-6599-4635-B0C7-6E4FF977E86C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB194D03-6599-4635-B0C7-6E4FF977E86C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB194D03-6599-4635-B0C7-6E4FF977E86C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB194D03-6599-4635-B0C7-6E4FF977E86C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43DBC787-EEDF-46B6-BE8C-F1F758275044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43DBC787-EEDF-46B6-BE8C-F1F758275044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43DBC787-EEDF-46B6-BE8C-F1F758275044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43DBC787-EEDF-46B6-BE8C-F1F758275044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A83129B-5F45-4B30-A40C-7D8520A73A7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A83129B-5F45-4B30-A40C-7D8520A73A7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A83129B-5F45-4B30-A40C-7D8520A73A7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A83129B-5F45-4B30-A40C-7D8520A73A7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{827B45D9-3647-4740-8FBD-A790B64E48CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{827B45D9-3647-4740-8FBD-A790B64E48CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{827B45D9-3647-4740-8FBD-A790B64E48CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{827B45D9-3647-4740-8FBD-A790B64E48CA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +104,11 @@ Global
 		{BB995A71-ECAD-4EDE-B445-849849E08316} = {FC03211D-EC25-4780-B71E-8BB9284A5E94}
 		{E7DA475B-97AC-4784-A52C-44F2265DDA73} = {FC03211D-EC25-4780-B71E-8BB9284A5E94}
 		{E392DF4D-C62C-4224-9CA5-89CBB3552059} = {FC03211D-EC25-4780-B71E-8BB9284A5E94}
+		{4D397F45-D8F7-4BC6-836C-4CEDB34B9294} = {F29D3655-0DF7-4A88-8D1D-44C368DE38AE}
+		{FB194D03-6599-4635-B0C7-6E4FF977E86C} = {4D397F45-D8F7-4BC6-836C-4CEDB34B9294}
+		{43DBC787-EEDF-46B6-BE8C-F1F758275044} = {4D397F45-D8F7-4BC6-836C-4CEDB34B9294}
+		{5A83129B-5F45-4B30-A40C-7D8520A73A7A} = {4D397F45-D8F7-4BC6-836C-4CEDB34B9294}
+		{827B45D9-3647-4740-8FBD-A790B64E48CA} = {4D397F45-D8F7-4BC6-836C-4CEDB34B9294}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A09A596-ED82-4417-85BF-3265AF2BF72F}
