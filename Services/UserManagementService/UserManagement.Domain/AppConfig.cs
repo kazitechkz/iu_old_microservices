@@ -11,5 +11,8 @@ namespace UserManagement.Domain
         public string? Mode { get; set; }
         public string? OrganizationService { get; set; }
 
+        public string? SecurityKey { get; set; }
+        public string? ValidIssuer { get; set; }
+
     }
 }

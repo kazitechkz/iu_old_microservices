@@ -9,5 +9,8 @@ namespace UserManagement.Application.Contracts.IRepositories
 {
     public interface IUserRoleRepository : IGenericRepository<UserRoleModel>
     {
+        public Task<IReadOnlyCollection<UserRoleModel>> GetActualUserRole(long UserId);
+
+
     }
 }

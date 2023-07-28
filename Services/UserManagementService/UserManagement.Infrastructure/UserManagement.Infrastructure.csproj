@@ -14,7 +14,6 @@
   <ItemGroup>
     <Folder Include="Contracts\Services\" />
     <Folder Include="Contracts\Specifications\RoleSpecifications\" />
-    <Folder Include="Contracts\Specifications\UserRoleSpecifications\" />
     <Folder Include="Contracts\Specifications\GenderSpecifications\" />
     <Folder Include="Interceptors\" />
   </ItemGroup>

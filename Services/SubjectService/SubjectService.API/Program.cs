@@ -23,6 +23,7 @@ using (var scope = app.Services.CreateScope())
     try
     {
         await context.Database.MigrateAsync();
+        await DbSeeder.SeedAsync(context, loggerFactory);
     }
     catch (Exception ex)
     {

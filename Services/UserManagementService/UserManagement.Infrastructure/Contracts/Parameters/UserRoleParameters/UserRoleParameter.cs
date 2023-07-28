@@ -9,5 +9,8 @@ namespace UserManagement.Infrastructure.Contracts.Parameters.UserRoleParameters
 {
     public class UserRoleParameter : BaseParameter
     {
+        public DateOnly ActualDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        public int Status { get; set; } = 1;
+
     }
 }

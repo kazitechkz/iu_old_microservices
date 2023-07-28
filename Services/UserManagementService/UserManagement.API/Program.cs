@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using System;
 using System.Text.Json.Serialization;
+using UserManagement.API.Extension;
 using UserManagement.API.Middlewares;
 using UserManagement.Application;
 using UserManagement.Domain;
@@ -20,6 +21,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>{ options.JsonSeriali
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAPIServices(builder.Configuration);
 builder.Services.AddApplicationService();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 var app = builder.Build();
@@ -51,6 +53,7 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware(typeof(ExceptionHandlerMiddleware));
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

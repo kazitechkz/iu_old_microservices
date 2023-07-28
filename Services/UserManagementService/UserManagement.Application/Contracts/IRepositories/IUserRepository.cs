@@ -13,8 +13,5 @@ namespace UserManagement.Application.Contracts.IRepositories
 
         public Task<UserModel> GetUserByPhone(string phone);
 
-
-
-
     }
 }
