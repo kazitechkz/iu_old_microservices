@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "academicyearservice.api": "StartDebugging",
+        "usermanagement.api": "StartDebugging",
+        "organizationservice.api": "StartDebugging",
+        "subjectservice.api": "StartDebugging"
+      }
+    }
+  }
+}

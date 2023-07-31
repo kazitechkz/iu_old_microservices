@@ -1,0 +1,71 @@
+version: '3.4'
+
+services:
+
+  maria_db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    
+   
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - MYSQL_ROOT_PASSWORD:root
+    depends_on:
+      - maria_db
+
+  usermanagement.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:MySqlConnectionString=server=maria_db;port=3306;username=root;password=root;database=iu_users"
+    ports:
+      - "5010:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+         - maria_db
+
+  organizationservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=server=maria_db;port=3306;username=root;password=root;database=iu_organizations"
+    ports:
+      - "5020:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+        - maria_db
+
+  academicyearservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=server=maria_db;username=root;password=root;database=iu_academic_years"
+    ports:
+      - "5030:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+        - maria_db
+
+  subjectservice.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:MySqlConnectionString=server=maria_db;port=3306;username=root;password=root;database=iu_subjects"
+    ports:
+      - "5040:80"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+    depends_on:
+        - maria_db

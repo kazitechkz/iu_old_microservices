@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using UserManagement.Application.Contracts.IRepositories;
 using UserManagement.Application.DTO.AuthDTO;
@@ -109,7 +110,7 @@ namespace UserManagement.Application.Features.Auth
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim(ClaimTypes.MobilePhone, user.Phone.ToString()),
                         new Claim(JwtRegisteredClaimNames.AuthTime, DateTime.UtcNow.ToString()),
-                        new Claim(ClaimTypes.Role, role_values),
+                        new Claim(ClaimTypes.Role, JsonSerializer.Serialize(roles)),
                         
             };
                 

@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  maria_db:
+    image: maria_db
+    
+  phpmyadmin:
+    image: phpmyadmin
+
+  academicyearservice.api:
+    image: ${DOCKER_REGISTRY-}academicyearserviceapi
+    build:
+      context: .
+      dockerfile: Services/AcademicYearService/AcademicYearService.API/Dockerfile
+
+  usermanagement.api:
+    image: ${DOCKER_REGISTRY-}usermanagementapi
+    build:
+      context: .
+      dockerfile: Services/UserManagementService/UserManagement.API/Dockerfile
+
+
+  organizationservice.api:
+    image: ${DOCKER_REGISTRY-}organizationserviceapi
+    build:
+      context: .
+      dockerfile: Services/OrganizationService/OrganizationService.API/Dockerfile
+
+
+  subjectservice.api:
+    image: ${DOCKER_REGISTRY-}subjectserviceapi
+    build:
+      context: .
+      dockerfile: Services/SubjectService/SubjectService.API/Dockerfile
+
+
+
+volumes:
+  maria_db_data:
