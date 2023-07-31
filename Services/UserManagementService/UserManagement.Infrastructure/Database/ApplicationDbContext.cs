@@ -66,6 +66,7 @@ namespace UserManagement.Infrastructure.Database
         public DbSet<GenderModel> Genders { get; set; }
         public DbSet<UserModel> Users { get; set; }
         public DbSet<UserRoleModel> UserRoles { get; set; }
+        public DbSet<ClientModel> Clients { get; set; }
 
 
     }

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserManagement.Application.DTO.AuthDTO
+namespace UserManagement.Domain.Models
 {
-    public class LoginDTO
+    public class ClientModel : BaseModel
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
+
+        public string RoleCode { get; set; }
     }
 }

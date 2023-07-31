@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using UserManagement.Application.DTO.AuthDTO;
@@ -24,6 +25,14 @@ namespace UserManagement.API.Controllers
         {
             ResponseRDTO<string> result = await _mediator.Send(new LoginCommand(model));
             return StatusCode(result.StatusCode, result);
+        }
+
+
+        [Authorize]
+        [HttpGet]
+        public  string Test()
+        {
+            return "OK";
         }
     }
 }

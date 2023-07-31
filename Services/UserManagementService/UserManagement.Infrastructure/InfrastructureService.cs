@@ -21,12 +21,14 @@ namespace UserManagement.Infrastructure
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 
+
             //Scoped
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IGenderRepository, GenderRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+            services.AddScoped<IClientRepository, ClientRepository>();
 
 
             return services;

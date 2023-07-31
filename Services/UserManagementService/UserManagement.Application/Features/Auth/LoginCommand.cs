@@ -24,12 +24,10 @@ namespace UserManagement.Application.Features.Auth
     {
         public LoginCommand(LoginDTO model)
         {
-            Login = model.Email;
-            Password = model.Password;
+            this.model = model;
         }
-
-        public string Login { get; set; }
-        public string Password { get; set; }
+        public LoginDTO model;
+        
 
     }
 
@@ -39,11 +37,13 @@ namespace UserManagement.Application.Features.Auth
 
         private readonly IUserRepository userRepository;
         private readonly IUserRoleRepository userRoleRepository;
+        private readonly IClientRepository clientRepository;
         private readonly IMapper mapper;
         private readonly AppConfig appConfig;
 
-        public LoginCommandHandler(IUserRepository userRepository, IUserRoleRepository userRoleRepository, IMapper mapper, IOptions<AppConfig> appConfig)
+        public LoginCommandHandler(IClientRepository clientRepository,IUserRepository userRepository, IUserRoleRepository userRoleRepository, IMapper mapper, IOptions<AppConfig> appConfig)
         {
+            this.clientRepository = clientRepository;
             this.userRepository = userRepository;
             this.userRoleRepository = userRoleRepository;
             this.mapper = mapper;
@@ -54,7 +54,27 @@ namespace UserManagement.Application.Features.Auth
         {
             try
             {
-                UserModel user = await userRepository.GetUserByEmail(request.Login);
+                ClientModel client =  await clientRepository.GetByClientId(request.model.ClientId);
+                if (client == null)
+                {
+                    return new ResponseRDTO<string>
+                    {
+                        StatusCode = 403,
+                        Success = false,
+                        Message = "Forbidden",
+                    };
+                }
+                if(!SecurityHelper.VerifyPassword(client.ClientSecret, request.model.ClientSecret))
+                {
+                    return new ResponseRDTO<string>
+                    {
+                        StatusCode = 403,
+                        Success = false,
+                        Message = "Forbidden",
+                    };
+                }
+
+                UserModel user = await userRepository.GetUserByEmail(request.model.Email);
                 if (user == null)
                 {
                     return new ResponseRDTO<string>
@@ -73,7 +93,7 @@ namespace UserManagement.Application.Features.Auth
                         Message = "Вход для данного пользователя не доступен",
                     };
                 }
-                if (!SecurityHelper.VerifyPassword(user.Password, request.Password))
+                if (!SecurityHelper.VerifyPassword(user.Password, request.model.Password))
                 {
                     return new ResponseRDTO<string>
                     {
@@ -92,13 +112,14 @@ namespace UserManagement.Application.Features.Auth
                         Message = "Пользователь не найден",
                     };
                 }
+                string role = client.RoleCode;
+                IEnumerable<long?> schools = userModels.Where(p=>p.Role.Code.Equals(role)).Where(p=>!p.SchoolId.Equals(null)).Select(p=>p.SchoolId).ToArray();
                 var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(appConfig.SecurityKey));
                 var signingCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
                 var expirationTimeStamp = DateTime.Now.AddMinutes(120);
-                IEnumerable<string> roles = userModels.Select(p => p.Role.Code).ToArray();
-                IEnumerable<long?> schools = userModels.Select(p => p.SchoolId).ToArray();
 
-                string role_values = String.Join(",", roles);
+
+                
 
 
                 var claims = new List<Claim>
@@ -110,10 +131,11 @@ namespace UserManagement.Application.Features.Auth
                         new Claim(JwtRegisteredClaimNames.Email, user.Email),
                         new Claim(ClaimTypes.MobilePhone, user.Phone.ToString()),
                         new Claim(JwtRegisteredClaimNames.AuthTime, DateTime.UtcNow.ToString()),
-                        new Claim(ClaimTypes.Role, JsonSerializer.Serialize(roles)),
-                        
+                        new Claim(ClaimTypes.Role, role),
+                        new Claim(type:"SchoolId", JsonSerializer.Serialize(schools)),
+
             };
-                
+
                 var tokenOptions = new JwtSecurityToken(
                             issuer: appConfig.ValidIssuer,
                             claims: claims,

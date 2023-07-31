@@ -77,6 +77,12 @@ namespace UserManagement.Infrastructure.Database
                         }
                     }
                 }
+                if (!context.Clients.Any())
+                {
+                    await context.Clients.AddRangeAsync(DbSeeder.GetClients());
+                    await context.SaveChangesAsync();
+                    logger.LogInformation("Successfully Migrated Clients");
+                }
                 
             }
             catch (Exception ex)
@@ -201,8 +207,50 @@ namespace UserManagement.Infrastructure.Database
 
             };
         }
+        public static IEnumerable<ClientModel> GetClients()
+        {
+            return new List<ClientModel>
+            {
+                new ClientModel()
+                {
+                     RoleCode = DbConstants.GlobalAdminCode,
+                     ClientId = "global_admin_client",
+                     ClientSecret = SecurityHelper.EncryptPassword("global_admin_123"),
+                },
+                new ClientModel()
+                {
+                     RoleCode = DbConstants.GlobalModerCode,
+                     ClientId = "global_moder_client",
+                     ClientSecret = SecurityHelper.EncryptPassword("global_moder_123"),
+                },
+                new ClientModel()
+                {
+                     RoleCode = DbConstants.LocalAdminCode,
+                     ClientId = "local_admin_client",
+                     ClientSecret = SecurityHelper.EncryptPassword("local_admin_123"),
+                },
+                new ClientModel()
+                {
+                     RoleCode = DbConstants.ModerCode,
+                     ClientId = "local_moder_client",
+                     ClientSecret = SecurityHelper.EncryptPassword("local_moder_123"),
+                },
+                new ClientModel()
+                {
+                     RoleCode = DbConstants.TeacherCode,
+                     ClientId = "teacher_client",
+                     ClientSecret = SecurityHelper.EncryptPassword("teacher_123"),
+                },
+                new ClientModel()
+                {
+                     RoleCode = DbConstants.StudentCode,
+                     ClientId = "student_client",
+                     ClientSecret = SecurityHelper.EncryptPassword("student_123"),
+                },
+            };
+        }
 
     }
 
-   
+
 }

@@ -11,7 +11,7 @@ using UserManagement.Infrastructure.Database;
 namespace UserManagement.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230727040509_InitialMigration")]
+    [Migration("20230731092737_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -21,6 +21,41 @@ namespace UserManagement.Infrastructure.Database.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.9")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
+
+            modelBuilder.Entity("UserManagement.Domain.Models.ClientModel", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ClientId")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("ClientSecret")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("RoleCode")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
 
             modelBuilder.Entity("UserManagement.Domain.Models.GenderModel", b =>
                 {
@@ -232,7 +267,7 @@ namespace UserManagement.Infrastructure.Database.Migrations
                         .IsRequired();
 
                     b.HasOne("UserManagement.Domain.Models.UserModel", "User")
-                        .WithMany("Roles")
+                        .WithMany("UserRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -244,7 +279,7 @@ namespace UserManagement.Infrastructure.Database.Migrations
 
             modelBuilder.Entity("UserManagement.Domain.Models.UserModel", b =>
                 {
-                    b.Navigation("Roles");
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }
