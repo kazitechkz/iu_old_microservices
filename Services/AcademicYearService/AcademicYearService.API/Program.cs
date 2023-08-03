@@ -1,3 +1,4 @@
+using AcademicYearService.API.Extensions;
 using AcademicYearService.API.Middlewares;
 using AcademicYearService.Application;
 using AcademicYearService.Infrastructure;
@@ -11,18 +12,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAppExtensions(builder.Configuration);
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<DataContext>(opt =>
-{
-    opt.UseMySql(connectionString, MySqlServerVersion.AutoDetect(connectionString));
-});
-builder.Services.AddControllersWithViews()
-    .AddNewtonsoftJson(options =>
-        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-    );
 
 var app = builder.Build();
 app.UseMiddleware(typeof(ExceptionHandlerMiddleware));

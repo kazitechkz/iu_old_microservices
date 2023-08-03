@@ -16,7 +16,7 @@ namespace IdentityServer.DbContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<ApplicationUser>().HasQueryFilter(x => x.IsDeleted == false);
+            modelBuilder.Entity<ApplicationUser>().HasQueryFilter(x => x.IsDeleted == false || x.Status != 1);
         }
         public override int SaveChanges()
         {

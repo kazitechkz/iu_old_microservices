@@ -35,5 +35,12 @@ services:
 
 
 
+  identityserver:
+    image: ${DOCKER_REGISTRY-}identityserver
+    build:
+      context: .
+      dockerfile: IdentityServer/IdentityServer/Dockerfile
+
 volumes:
   maria_db_data:
+

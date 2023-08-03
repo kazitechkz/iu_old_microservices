@@ -4,6 +4,9 @@ using SubjectService.Application.DTO.SubjectDTO;
 using SubjectService.Application.DTO.ResponseDTO;
 using SubjectService.Application.Features.Subject;
 using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using SubjectService.API.Helpers;
+using SubjectService.Application.Authorize;
 
 namespace SubjectService.API.Controllers
 {
@@ -16,6 +19,7 @@ namespace SubjectService.API.Controllers
             _mediator = mediator;
         }
 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(typeof(ResponseRDTO<SubjectRDTO>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResponseRDTO<SubjectRDTO>>> Get([FromQuery] long Id)
@@ -24,6 +28,7 @@ namespace SubjectService.API.Controllers
             return StatusCode(result.StatusCode, result);
         }
 
+        [Authorize]
         [HttpGet]
         [ProducesResponseType(typeof(ResponseRDTO<IReadOnlyList<SubjectRDTO>>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResponseRDTO<IReadOnlyList<SubjectRDTO>>>> All()
@@ -32,6 +37,7 @@ namespace SubjectService.API.Controllers
             return StatusCode(result.StatusCode, result);
         }
 
+        [AuthorizeByRole(AuthConstants.Superadmin, AuthConstants.Methodist)]
         [HttpPost]
         [ProducesResponseType(typeof(ResponseRDTO<SubjectRDTO>), (int)HttpStatusCode.Created)]
         public async Task<ActionResult<ResponseRDTO<SubjectRDTO>>> Create([FromBody] SubjectCDTO model)
@@ -39,6 +45,8 @@ namespace SubjectService.API.Controllers
             ResponseRDTO<SubjectRDTO> result = await _mediator.Send(new SubjectCreateCommand(model));
             return StatusCode(result.StatusCode, result);
         }
+
+        [AuthorizeByRole(AuthConstants.Superadmin, AuthConstants.Methodist)]
         [HttpPut]
         [ProducesResponseType(typeof(ResponseRDTO<SubjectRDTO>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResponseRDTO<SubjectRDTO>>> Update([FromBody] SubjectUDTO model, [FromQuery] long Id)
@@ -47,6 +55,7 @@ namespace SubjectService.API.Controllers
             return StatusCode(result.StatusCode, result);
         }
 
+        [AuthorizeByRole(AuthConstants.Superadmin, AuthConstants.Methodist)]
         [HttpDelete]
         [ProducesResponseType(typeof(ResponseRDTO<bool>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ResponseRDTO<bool>>> Delete([FromQuery] long Id)

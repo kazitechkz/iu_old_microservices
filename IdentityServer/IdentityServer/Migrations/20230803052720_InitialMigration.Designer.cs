@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IdentityServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230802045539_InitialMigration")]
+    [Migration("20230803052720_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -52,6 +52,10 @@ namespace IdentityServer.Migrations
 
                     b.Property<long?>("GenderId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("IIN")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
                         .HasColumnType("longtext");
