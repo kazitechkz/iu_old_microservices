@@ -1,5 +1,8 @@
 ﻿using System.Net;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OrganizationService.API.Helpers;
+using OrganizationService.Application.Core.Authorize;
 using OrganizationService.Application.Core.DTOs.Areas;
 using OrganizationService.Application.Features.Areas;
 
@@ -8,6 +11,7 @@ namespace OrganizationService.API.Controllers;
 public class AreaController : BaseController
 {
     [HttpGet]
+    [Authorize]
     [ProducesResponseType(typeof(List<AreaRDTO>), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAreas()
     {
@@ -15,6 +19,7 @@ public class AreaController : BaseController
     }
 
     [HttpGet("id")]
+    [Authorize]
     [ProducesResponseType(typeof(AreaRDTO), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> GetAreaById(long id)
     {
@@ -22,6 +27,7 @@ public class AreaController : BaseController
     }
 
     [HttpPost]
+    [AuthorizeByRole(AuthConstants.Superadmin)]
     [ProducesResponseType(typeof(AreaRDTO), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> CreateArea(AreaCUD areaCud)
     {
@@ -29,6 +35,7 @@ public class AreaController : BaseController
     }
     
     [HttpPut("id")]
+    [AuthorizeByRole(AuthConstants.Superadmin)]
     [ProducesResponseType(typeof(AreaRDTO), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> UpdateArea(long id, AreaCUD areaCud)
     {
@@ -36,6 +43,7 @@ public class AreaController : BaseController
     }
 
     [HttpDelete("id")]
+    [AuthorizeByRole(AuthConstants.Superadmin)]
     [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
     public async Task<IActionResult> DeleteArea(long id)
     {

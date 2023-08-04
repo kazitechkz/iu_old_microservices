@@ -50,6 +50,10 @@ namespace IdentityServer.Migrations
                     b.Property<long?>("GenderId")
                         .HasColumnType("bigint");
 
+                    b.Property<string>("IIN")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("longtext");
 

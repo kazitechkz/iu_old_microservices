@@ -13,13 +13,6 @@ services:
       context: .
       dockerfile: Services/AcademicYearService/AcademicYearService.API/Dockerfile
 
-  usermanagement.api:
-    image: ${DOCKER_REGISTRY-}usermanagementapi
-    build:
-      context: .
-      dockerfile: Services/UserManagementService/UserManagement.API/Dockerfile
-
-
   organizationservice.api:
     image: ${DOCKER_REGISTRY-}organizationserviceapi
     build:
@@ -33,7 +26,12 @@ services:
       context: .
       dockerfile: Services/SubjectService/SubjectService.API/Dockerfile
 
-
+  identityserver:
+    image: ${DOCKER_REGISTRY-}identityserver
+    build:
+      context: .
+      dockerfile: IdentityServer/IdentityServer/Dockerfile
 
 volumes:
   maria_db_data:
+

@@ -102,13 +102,21 @@ public class Index : PageModel
 
         if (ModelState.IsValid)
         {
+            var exist = _db.ApplicationUsers.Where(p => p.IsDeleted == false && p.Status == 1).FirstOrDefault(u => u.UserName.ToLower() == Input.Username.ToLower());
+            if(exist == null)
+            {
+                await _events.RaiseAsync(new UserLoginFailureEvent(Input.Username, "Пользователь ограничен в действиях", clientId: context?.Client.ClientId));
+                ModelState.AddModelError(string.Empty, "Пользователь ограничен в действиях");
+                await BuildModelAsync(Input.ReturnUrl);
+                return Page();
+            }
             var result = await _signInManager.PasswordSignInAsync
                 (Input.Username, Input.Password, Input.RememberLogin, lockoutOnFailure: false);
-
+            
             // validate username/password against in-memory store
             if (result.Succeeded)
             {
-                var user = _db.ApplicationUsers.FirstOrDefault(u => u.UserName.ToLower() == Input.Username.ToLower());
+                var user = _db.ApplicationUsers.Where(p=> p.IsDeleted == false && p.Status == 1).FirstOrDefault(u => u.UserName.ToLower() == Input.Username.ToLower());
                 await _events.RaiseAsync(new UserLoginSuccessEvent(user.UserName, user.Id, user.UserName, clientId: context?.Client.ClientId));
 
                 // only set explicit expiration here if user chooses "remember me". 

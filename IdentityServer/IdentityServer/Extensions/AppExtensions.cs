@@ -1,5 +1,8 @@
-﻿using IdentityServer.DbContext;
+﻿using Duende.IdentityServer.Services;
+using IdentityServer.DbContext;
 using IdentityServer.Models;
+using IdentityServer.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,15 +15,15 @@ namespace IdentityServer.Extensions
             //Database Services
             string connectionString = configuration.GetConnectionString("MySqlConnectionString");
             services.AddDbContext<AppDbContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
-
             services.AddIdentity<ApplicationUser,IdentityRole>()
                 .AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
             //Scoped
             services.AddScoped<IDbSeeder, DbSeeder>();
-
+            services.AddScoped<IProfileService, ProfileService>();
             //Razor
             services.AddRazorPages();
             //AddIdentity
+            services.AddLocalApiAuthentication();
             services.AddIdentityServer(options =>
             {
                 options.Events.RaiseFailureEvents = true;
@@ -33,14 +36,8 @@ namespace IdentityServer.Extensions
                .AddInMemoryApiScopes(Configuration.GetApiScopes)
                .AddInMemoryClients(Configuration.GetClients)
                .AddAspNetIdentity<ApplicationUser>()
+               .AddProfileService<ProfileService>()
                .AddDeveloperSigningCredential();
-
-
-            
-                
-               
-
-
             return services;
         }
 

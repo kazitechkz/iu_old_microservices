@@ -16,11 +16,12 @@ namespace IdentityServer.DbContext
         public static IEnumerable<ApiScope> GetApiScopes =>
             new List<ApiScope>
             {
-                new ApiScope(name:"read",displayName:"Read Some of the data"),
-                new ApiScope(name:"create",displayName:"Create Some of the data"),
-                new ApiScope(name:"update",displayName:"Update Some of the data"),
-                new ApiScope(name:"delete",displayName:"Delete Some of the data"),
-                new ApiScope(name:"full",displayName:"Full Access to data"),
+                new ApiScope(name:"superadmin_scope",displayName:"SuperAdmin Scope"),
+                new ApiScope(name:"methodist_scope",displayName:"Methodist Scope"),
+                new ApiScope(name:"admin_scope",displayName:"Admin Scope"),
+                new ApiScope(name:"moder_scope",displayName:"Moder Scope"),
+                new ApiScope(name:"teacher_scope",displayName:"Teacher Scope"),
+                new ApiScope(name:"student_scope",displayName:"Student Scope"),
             };
 
         public static IEnumerable<Client> GetClients =>
@@ -30,8 +31,8 @@ namespace IdentityServer.DbContext
                 {
                     ClientId = "global_administrator",
                     ClientSecrets = {new Secret("admin123".Sha256())},
-                    AllowedGrantTypes = GrantTypes.Code,
-                    AllowedScopes = {"full"},
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes = {"superadmin_scope"},
                     //RedirectUris = { "https://localhost:5000/signin-oidc" },
                     //PostLogoutRedirectUris = { "https://localhost:5000/signout-callback-oidc" },
                 },
@@ -39,36 +40,36 @@ namespace IdentityServer.DbContext
                 {
                     ClientId = "methodist_client",
                     ClientSecrets = {new Secret("admin123".Sha256())},
-                    AllowedGrantTypes = GrantTypes.Code,
-                    AllowedScopes = {"read","create","update","delete"}
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes = {"methodist_scope"}
                 },
                 new Client
                 {
                     ClientId = "admin_client",
                     ClientSecrets = {new Secret("admin123".Sha256())},
-                    AllowedGrantTypes = GrantTypes.Code,
-                    AllowedScopes = {"read","create","update","delete"}
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes = {"admin_scope"}
                 },
                 new Client
                 {
                     ClientId = "moder_client",
                     ClientSecrets = {new Secret("admin123".Sha256())},
-                    AllowedGrantTypes = GrantTypes.Code,
-                    AllowedScopes = {"read","create","update","delete"}
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes = { "moder_scope" }
                 },
                 new Client
                 {
                     ClientId = "teacher_client",
                     ClientSecrets = {new Secret("admin123".Sha256())},
-                    AllowedGrantTypes = GrantTypes.Code,
-                    AllowedScopes = {"read","create","update","delete"}
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes = { "teacher_scope" }
                 },
                 new Client
                 {
                     ClientId = "student_client",
                     ClientSecrets = {new Secret("admin123".Sha256())},
-                    AllowedGrantTypes = GrantTypes.Code,
-                    AllowedScopes = {"read","update"}
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    AllowedScopes = { "student_scope" }
                 },
 
             };

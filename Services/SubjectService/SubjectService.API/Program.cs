@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using SubjectService.API.Extensions;
 using SubjectService.API.Middlewares;
 using SubjectService.Application;
 using SubjectService.Infrastructure;
@@ -12,6 +13,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAppExtensions(builder.Configuration);
 builder.Services.AddApplicationService();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 var app = builder.Build();

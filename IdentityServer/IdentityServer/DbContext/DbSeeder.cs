@@ -48,6 +48,7 @@ namespace IdentityServer.DbContext
                         Email = "superadmin@gmail.com",
                         EmailConfirmed = true,
                         PhoneNumber = "+77777777777",
+                        IIN = "000000000000",
                         Status = 1,
                         GenderId = 1,
                         CreatedAt = DateTime.Now,
@@ -60,7 +61,8 @@ namespace IdentityServer.DbContext
                     {
                         new Claim(JwtClaimTypes.Role,AppConstants.Superadmin),
                         new Claim(JwtClaimTypes.Name,superAdmin.UserName),
-                        new Claim(JwtClaimTypes.Email,superAdmin.Email)
+                        new Claim(JwtClaimTypes.Email,superAdmin.Email),
+                        new Claim("IIN",superAdmin.IIN),
                     }).Result;
                     //Create Methodist
                     ApplicationUser methodist = new ApplicationUser
@@ -72,6 +74,7 @@ namespace IdentityServer.DbContext
                         Email = "methodist@gmail.com",
                         EmailConfirmed = true,
                         PhoneNumber = "+77777777778",
+                        IIN = "111111111111",
                         Status = 1,
                         GenderId = 1,
                         CreatedAt = DateTime.Now,
@@ -84,7 +87,8 @@ namespace IdentityServer.DbContext
                     {
                         new Claim(JwtClaimTypes.Role,AppConstants.Methodist),
                         new Claim(JwtClaimTypes.Name,methodist.UserName),
-                        new Claim(JwtClaimTypes.Email,methodist.Email)
+                        new Claim(JwtClaimTypes.Email,methodist.Email),
+                        new Claim("IIN",methodist.IIN),
                     }).Result;
 
                     //Create Administrator - Director of the school
@@ -97,6 +101,7 @@ namespace IdentityServer.DbContext
                         Email = "admin@gmail.com",
                         EmailConfirmed = true,
                         PhoneNumber = "+77777777779",
+                        IIN = "222222222222",
                         Status = 1,
                         GenderId = 1,
                         CreatedAt = DateTime.Now,
@@ -109,7 +114,8 @@ namespace IdentityServer.DbContext
                     {
                         new Claim(JwtClaimTypes.Role,AppConstants.Admin),
                         new Claim(JwtClaimTypes.Name,administrator.UserName),
-                        new Claim(JwtClaimTypes.Email,administrator.Email)
+                        new Claim(JwtClaimTypes.Email,administrator.Email),
+                        new Claim("IIN",administrator.IIN),
                     }).Result;
                     //Create Administrator - Director of the school
                     ApplicationUser moderator = new ApplicationUser
@@ -121,6 +127,7 @@ namespace IdentityServer.DbContext
                         Email = "moderator@gmail.com",
                         EmailConfirmed = true,
                         PhoneNumber = "+77777777780",
+                        IIN = "333333333333",
                         Status = 1,
                         GenderId = 1,
                         CreatedAt = DateTime.Now,
@@ -133,7 +140,8 @@ namespace IdentityServer.DbContext
                     {
                         new Claim(JwtClaimTypes.Role,AppConstants.Moder),
                         new Claim(JwtClaimTypes.Name,moderator.UserName),
-                        new Claim(JwtClaimTypes.Email,moderator.Email)
+                        new Claim(JwtClaimTypes.Email,moderator.Email),
+                        new Claim("IIN",moderator.IIN),
                     }).Result;
                     //Create Teacher
                     ApplicationUser teacher = new ApplicationUser
@@ -145,6 +153,7 @@ namespace IdentityServer.DbContext
                         Email = "teacher@gmail.com",
                         EmailConfirmed = true,
                         PhoneNumber = "+77777777781",
+                        IIN = "444444444444",
                         Status = 1,
                         GenderId = 1,
                         CreatedAt = DateTime.Now,
@@ -157,7 +166,8 @@ namespace IdentityServer.DbContext
                     {
                         new Claim(JwtClaimTypes.Role,AppConstants.Teacher),
                         new Claim(JwtClaimTypes.Name,teacher.UserName),
-                        new Claim(JwtClaimTypes.Email,teacher.Email)
+                        new Claim(JwtClaimTypes.Email,teacher.Email),
+                        new Claim("IIN",teacher.IIN),
                     }).Result;
 
                     //Add Student
@@ -170,6 +180,7 @@ namespace IdentityServer.DbContext
                         Email = "student@gmail.com",
                         EmailConfirmed = true,
                         PhoneNumber = "+77777777782",
+                        IIN = "555555555555",
                         Status = 1,
                         GenderId = 1,
                         CreatedAt = DateTime.Now,
@@ -182,7 +193,8 @@ namespace IdentityServer.DbContext
                     {
                         new Claim(JwtClaimTypes.Role,AppConstants.Student),
                         new Claim(JwtClaimTypes.Name,student.UserName),
-                        new Claim(JwtClaimTypes.Email,student.Email)
+                        new Claim(JwtClaimTypes.Email,student.Email),
+                        new Claim("IIN",student.IIN),
                     }).Result;
                 }
             }
