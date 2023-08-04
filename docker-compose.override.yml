@@ -22,18 +22,6 @@ services:
     depends_on:
       - maria_db
 
-  usermanagement.api:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "ConnectionStrings:MySqlConnectionString=server=maria_db;port=3306;username=root;password=root;database=iu_users"
-    ports:
-      - "5010:80"
-    volumes:
-      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-    depends_on:
-         - maria_db
-
   organizationservice.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development

@@ -3,19 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.API", "Services\UserManagementService\UserManagement.API\UserManagement.API.csproj", "{57466C0A-6FBF-4CAB-A1A1-DE77BC83283E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F29D3655-0DF7-4A88-8D1D-44C368DE38AE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserManagementService", "UserManagementService", "{C54F5F50-CDF4-4510-BC2F-27AC9297CA2B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OrganizationService", "OrganizationService", "{FC03211D-EC25-4780-B71E-8BB9284A5E94}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Domain", "Services\UserManagementService\UserManagement.Domain\UserManagement.Domain.csproj", "{B5459F7B-8D09-4088-9987-FC52681F6FEA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Application", "Services\UserManagementService\UserManagement.Application\UserManagement.Application.csproj", "{E572CA46-2550-4468-826F-32961B1E627B}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagement.Infrastructure", "Services\UserManagementService\UserManagement.Infrastructure\UserManagement.Infrastructure.csproj", "{FB3B82F5-2AC3-4F31-B14D-01075D1B881C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrganizationService.API", "Services\OrganizationService\OrganizationService.API\OrganizationService.API.csproj", "{B8236099-7B5A-4EB2-AAC5-F84527037BAC}"
 EndProject
@@ -51,28 +43,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityS
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdentityServer", "IdentityServer\IdentityServer\IdentityServer.csproj", "{C227071C-CD40-456D-AF6A-78D726B3AA96}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserManagementService.API", "Services\UserManagementService\UserManagementService.API\UserManagementService.API.csproj", "{1617C7BF-C2CE-4AF2-9B7F-037EFEF327AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{57466C0A-6FBF-4CAB-A1A1-DE77BC83283E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{57466C0A-6FBF-4CAB-A1A1-DE77BC83283E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{57466C0A-6FBF-4CAB-A1A1-DE77BC83283E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{57466C0A-6FBF-4CAB-A1A1-DE77BC83283E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5459F7B-8D09-4088-9987-FC52681F6FEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5459F7B-8D09-4088-9987-FC52681F6FEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5459F7B-8D09-4088-9987-FC52681F6FEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5459F7B-8D09-4088-9987-FC52681F6FEA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E572CA46-2550-4468-826F-32961B1E627B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E572CA46-2550-4468-826F-32961B1E627B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E572CA46-2550-4468-826F-32961B1E627B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E572CA46-2550-4468-826F-32961B1E627B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB3B82F5-2AC3-4F31-B14D-01075D1B881C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB3B82F5-2AC3-4F31-B14D-01075D1B881C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB3B82F5-2AC3-4F31-B14D-01075D1B881C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB3B82F5-2AC3-4F31-B14D-01075D1B881C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8236099-7B5A-4EB2-AAC5-F84527037BAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B8236099-7B5A-4EB2-AAC5-F84527037BAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8236099-7B5A-4EB2-AAC5-F84527037BAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -129,17 +107,17 @@ Global
 		{C227071C-CD40-456D-AF6A-78D726B3AA96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C227071C-CD40-456D-AF6A-78D726B3AA96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C227071C-CD40-456D-AF6A-78D726B3AA96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1617C7BF-C2CE-4AF2-9B7F-037EFEF327AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1617C7BF-C2CE-4AF2-9B7F-037EFEF327AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1617C7BF-C2CE-4AF2-9B7F-037EFEF327AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1617C7BF-C2CE-4AF2-9B7F-037EFEF327AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{57466C0A-6FBF-4CAB-A1A1-DE77BC83283E} = {C54F5F50-CDF4-4510-BC2F-27AC9297CA2B}
 		{C54F5F50-CDF4-4510-BC2F-27AC9297CA2B} = {F29D3655-0DF7-4A88-8D1D-44C368DE38AE}
 		{FC03211D-EC25-4780-B71E-8BB9284A5E94} = {F29D3655-0DF7-4A88-8D1D-44C368DE38AE}
-		{B5459F7B-8D09-4088-9987-FC52681F6FEA} = {C54F5F50-CDF4-4510-BC2F-27AC9297CA2B}
-		{E572CA46-2550-4468-826F-32961B1E627B} = {C54F5F50-CDF4-4510-BC2F-27AC9297CA2B}
-		{FB3B82F5-2AC3-4F31-B14D-01075D1B881C} = {C54F5F50-CDF4-4510-BC2F-27AC9297CA2B}
 		{B8236099-7B5A-4EB2-AAC5-F84527037BAC} = {FC03211D-EC25-4780-B71E-8BB9284A5E94}
 		{BB995A71-ECAD-4EDE-B445-849849E08316} = {FC03211D-EC25-4780-B71E-8BB9284A5E94}
 		{E7DA475B-97AC-4784-A52C-44F2265DDA73} = {FC03211D-EC25-4780-B71E-8BB9284A5E94}
@@ -155,6 +133,7 @@ Global
 		{2E3B3623-6FA2-466E-9BAB-C2A8D6AC5191} = {8F44DD7B-0D7A-4477-B7C8-0138591945C7}
 		{407C7D87-3BCD-49A2-A467-ACAC73908011} = {8F44DD7B-0D7A-4477-B7C8-0138591945C7}
 		{C227071C-CD40-456D-AF6A-78D726B3AA96} = {C9EA51B1-D20D-443C-A9A8-A21E2C18EC93}
+		{1617C7BF-C2CE-4AF2-9B7F-037EFEF327AA} = {C54F5F50-CDF4-4510-BC2F-27AC9297CA2B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4A09A596-ED82-4417-85BF-3265AF2BF72F}
